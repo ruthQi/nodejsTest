@@ -30,6 +30,7 @@ __dirname:当前模块所在文件夹的完整路径
 exports：只能使用.语法来向外暴露内部变量
 module.exports：既可以通过.语法，也可以直接赋值一个对象
 原因：
+exports对象是通过形参的方式传入的，直接赋值形参会改变形参的引用，但并不能改变作用域外的值；module.exports不会改变形参的引用
 exports仅仅是module.exports的一个地址引用。
 nodejs只会导出module.exports的指向，如果exports指向变了，那就仅仅是exports不再指向module.exports，于是不会再被导出
 NodeJs开发者建议导出对象用module.exports,导出多个方法和变量用exports
@@ -46,9 +47,18 @@ npm remove/r 包名：删除包
 npm install/i 包名 --save:安装包并添加到依赖中
 npm install:根据package.json下载当前项目所依赖的包
 npm install 包名 --g:全局安装包
+npm ls:分析出当前路径下能够通过模块路径找到的所有包，并生成依赖树
 
-**如果在页面中引入node_modules中某个模块，优先从当前目录引入（node_modules），如果没有，则往上级查找，直到根目录
+**如果在页面中引入node_modules中某个模块，优先从当前目录引入（node_modules），如果没有，则往上级node_modules查找，直到根目录node_modules
 
 cnpm: 阿里团队创建的中国本地的npm包管理：https://npm.taobao.org/
+
+require.extensions:获取系统中已有的扩展加载方式
+module.paths:模块的查找路径
+
+#lesson28:Buffer
+buffer：一个二进制数据容器
+Node中的buffer是一个二进制数据容器,用于node中数据存放
+**Buffer在node中可以直接使用，不需要引入
 
 

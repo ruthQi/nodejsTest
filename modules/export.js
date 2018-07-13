@@ -52,3 +52,14 @@ module.exports = {
 exports.fun = 1;
 
 console.log(exports === module.exports);//false
+
+console.log(module.paths);
+/**
+ * 文件查找策略：沿路径向上逐级递归，直到根目录下的node_modules目录
+ * [ 'E:\\workspace\\nodejsTest\\modules\\node_modules',
+  'E:\\workspace\\nodejsTest\\node_modules',
+  'E:\\workspace\\node_modules',
+  'E:\\node_modules' ]
+  */
+
+  console.log(require.extensions);//{ '.js': [Function], '.json': [Function], '.node': [Function] }
