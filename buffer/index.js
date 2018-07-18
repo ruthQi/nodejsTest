@@ -33,7 +33,7 @@ console.log(str1.length);//3
  */
 
 //Buffer.alloc(size[, fill[, encoding]])
-//初始化：必须要有一个确定的长度，不能动态增加或减少，溢出不处理
+//初始化：必须要有一个确定的长度，不能动态增加或减少，超过255溢出不处理
 
 let buffer3 = new Buffer.alloc(10);//10个字节
 console.log(buffer3);//<Buffer 00 00 00 00 00 00 00 00 00 00>
@@ -48,8 +48,7 @@ console.log(buffer3);//<Buffer 0a 00 00 00 00 00 00 00 00 ff>超出数值范围�
 buffer3.forEach((item, index)=>{
    console.log(`${index}:${item}`)
 })
-/**
- * 
+/** 
 0:10
 1:0
 2:0
@@ -60,7 +59,7 @@ buffer3.forEach((item, index)=>{
 7:0
 8:0
 9:255
- */
+*/
 
 
 
