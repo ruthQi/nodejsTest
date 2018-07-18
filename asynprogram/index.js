@@ -30,7 +30,7 @@ emitter.once('done', (data)=>{
 
 emitter.emit('done', 'hahhha');
 
-//发布/订阅模式--eventproxy
+//发布/订阅模式--eventproxy:多异步协作
 
 var ep = new EventProxy();
 console.log(ep);
