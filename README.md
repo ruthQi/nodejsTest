@@ -62,3 +62,23 @@ Node中的buffer是一个二进制数据容器,用于node中数据存放
 **Buffer在node中可以直接使用，不需要引入
 
 
+#MongoDB数据库操作：
+> show dbs                                                            --->展示所有的数据库
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db                                                                  --->显示当前所在的数据库
+student
+> use school                                                          --->没有school则创建，存在则进入
+switched to db school
+> db
+school
+> db.students.insert({id:'001', name:'hahah', age:'18', sex: 'nan'}); --->当前数据库的student集合，如果存在则进入，不存在则创建；并插入一条数据
+WriteResult({ "nInserted" : 1 })
+> db.students.find();                                                 --->查询当前数据库，students集合所有的数据
+{ "_id" : ObjectId("5b5833f8a073641655adafd1"), "id" : "001", "name" : "hahah",
+"age" : "18", "sex" : "nan" }
+
+
+
+
