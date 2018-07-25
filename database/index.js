@@ -136,6 +136,11 @@ db.inventory.find({tags:["red", "blank"]});
 { "_id" : ObjectId("5b585066f9d3694104791cf8"), "item" : "planner", "qty" : 75, "tags" : [ "blank", "red" ], "dim_cm" : [ 22.85, 30 ] }
  */
 db.inventory.find({tags:{$all:["red", "blank"]}});
+/**
+ * 查询数组个数为3个的
+ * { "_id" : ObjectId("5b585066f9d3694104791cf7"), "item" : "paper", "qty" : 100, "tags" : [ "red", "blank", "plain" ], "dim_cm" : [ 14, 21 ] }
+ */
+db.inventory.find({tags:{$size:3}});
 
 
 db.inventory.insertMany( [
@@ -175,3 +180,12 @@ db.inventory.find( { "instock": { $elemMatch: { qty: 5, warehouse: "A" } } } );
 { "_id" : ObjectId("5b58523bf9d3694104791cfe"), "item" : "postcard", "instock" : [ { "warehouse" : "B", "qty" : 15 }, { "warehouse" : "C", "qty" : 35 } ] }
  */
 db.inventory.find( { "instock": { $elemMatch: { qty: { $gt: 10, $lte: 20 } } } } )
+
+/**
+{ "_id" : ObjectId("5b58523bf9d3694104791cfa"), "item" : "journal", "instock" : [ { "warehouse" : "A", "qty" : 5 }, { "warehouse" : "C", "qty" : 15 } ] }
+{ "_id" : ObjectId("5b58523bf9d3694104791cfd"), "item" : "planner", "instock" : [ { "warehouse" : "A", "qty" : 40 }, { "warehouse" : "B", "qty" : 5 } ] }
+ */
+db.inventory.find( { "instock.qty": 5, "instock.warehouse": "A" } )
+
+//查询不存在id字段的文档数据
+db.students.find({id:{$exists: false}});
