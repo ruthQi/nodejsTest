@@ -128,12 +128,13 @@ person.insertMany([
 //     }
 // })
 
-//方式5：使用Document的save方式
+//方式5：使用Document文档对象的save方式
 let person1 = new person({
     name:"宋小宝",
     age: 40,
     chat:"我是宋小宝"
 })
+//console.log(person1.toString())
 person1.save((err, product)=>{
     if(!err){
         /**

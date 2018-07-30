@@ -1,0 +1,17 @@
+//引入模块
+let http = require('http');
+let url = require('url');
+let {URL} = require('url');
+
+http.createServer((req, res)=>{
+   //方式1(最佳)
+   let myUrl = url.parse(req.url);//url对象
+   console.log(myUrl.search);
+   console.log(myUrl.hash);//null
+   //WHATWG API,使用这种方式new URL(req.url)，报错,因为req.url是从path开始的，路径不完整，最好使用url.parse()方式
+   //let myUrl1 = new URL(req.url);
+   let myUrl1 = new URL('https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash');
+   console.log(myUrl1)
+   res.end('Hello World');
+   
+}).listen(8080,'localhost');
