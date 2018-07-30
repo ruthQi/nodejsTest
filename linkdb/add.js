@@ -26,7 +26,7 @@ let person = mongoose.model('person', personSchema);
 //4.增删改查
 
 //4-1:增
-//方式1：
+// //方式1：
 person.create([
    {name:"胡可可", age:18, sex:"女", chat:"可可公主"},
    {name:"刘德华", age:58, chat:"华仔"},
@@ -117,5 +117,37 @@ person.insertMany([
       console.log('插入失败');
    }
 })
+
+//方式4：
+//报错person.insert is not a function
+// person.insert({name:"林妙可", age:19, sex:"女", chat:"可可小公主"}, (err, docs)=>{
+//     if(!err){
+//         console.log(docs)
+//     }else{
+//         throw err;
+//     }
+// })
+
+//方式5：使用Document的save方式
+let person1 = new person({
+    name:"宋小宝",
+    age: 40,
+    chat:"我是宋小宝"
+})
+person1.save((err, product)=>{
+    if(!err){
+        /**
+         * { sex: '男',
+            _id: 5b5e7ea42640d51d649fa4c3,
+            name: '宋小宝',
+            age: 40,
+            chat: '我是宋小宝',
+            __v: 0 }
+         */
+        console.log(product)
+    }else{
+        throw err;
+    }
+});
 
 
