@@ -2,7 +2,9 @@
 let http = require('http');
 let url = require('url');
 let {URL} = require('url');
-
+/**
+ * 如果url为完整路径，使用new URL()方式，如果不完整，使用url.parse()方式
+ */
 http.createServer((req, res)=>{
    //方式1(最佳)
    let myUrl = url.parse(req.url);//url对象
