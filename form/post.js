@@ -11,11 +11,19 @@ http.createServer((req,res)=>{
          allData += data;
       })
       req.once('end', ()=>{
-         console.log('结束');
+         //name=sdf&age=12&sex=%E5%A5%B3&college=HTML5&college=Java&file=no5.png
          console.log(allData)
-         let dataObj = querystring.parse(allData)
-         console.log(dataObj)    
+         let dataObj = querystring.parse(allData);
+         /**
+          * { name: 'sdf',
+               age: '12',
+               sex: '女',
+               college: [ 'HTML5', 'Java' ],
+               file: 'no5.png' }
+          */
+         console.log(dataObj)  
+         res.end(allData);  
       })
-      res.end('post');
+      
    }
 }).listen(8080, "localhost");
