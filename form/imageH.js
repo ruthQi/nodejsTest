@@ -2,6 +2,8 @@ let http = require('http');
 /**
  * 处理表单数据插件
  * https://github.com/felixge/node-formidable
+ * 
+ * util.inspect()将对象转化为字符串
  */
 let formidable = require('formidable');
 

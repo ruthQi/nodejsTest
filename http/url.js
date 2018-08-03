@@ -8,6 +8,8 @@ let {URL} = require('url');
 http.createServer((req, res)=>{
    //方式1(最佳)
    let myUrl = url.parse(req.url);//url对象
+   //undefined;myUrl.query:test=1不是个对象，不能使用.来获取test;url.parse(url,true)可以把字符串转化为对象，用.来调用
+   console.log(myUrl.query && myUrl.query.test);
    console.log(myUrl.search);
    console.log(myUrl.hash);//null
    //WHATWG API,使用这种方式new URL(req.url)，报错,因为req.url是从path开始的，路径不完整，最好使用url.parse()方式
