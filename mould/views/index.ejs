@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <style type="text/css">
+      .container{
+         border: 1px solid #eeeeee;
+         width: 450px;
+         min-height: 200px;
+         margin: 100px auto 0px;
+         border-bottom: 0px;
+      }
+      .con-title{
+         color: #666;
+         font-size: 14px;
+         height: 30px;
+         line-height: 30px;
+         border-bottom: 1px solid #eee;
+      }
+      .s-rank-title{
+         margin-left: 50px;
+         display: inline-block;
+      }
+      .s-count-title{
+         margin-left: 200px;
+         display: inline-block;
+      }
+      ul{
+         margin: 0px;
+         padding: 0;
+      }
+      .list-item{
+         height: 40px;
+         line-height: 40px;
+         color: #333;
+         font-size: 14px;
+         list-style: none;
+         border-bottom: 1px solid #eee;
+         padding-left: 20px;
+         position: relative;
+      }
+      .s-no{
+         width: 20px;
+         height: 20px;
+         display: inline-block;
+         text-align: center;
+         line-height: 20px;
+         background-color: red;
+         color: #fff;
+      }
+      .s-tips{
+         display: inline-block;
+         width: 2px;
+         height: 20px;
+         vertical-align: middle;  
+      }
+      .list-item p{
+         margin: 0;
+         padding: 0;
+         position: absolute;
+         right: 10px;
+         top: 0px;
+      }
+      .s-icon-up{
+         background-color: red;
+      }
+      .s-icon-down{
+         background-color: blue;
+      }
+   </style>
+</head>
+<body>
+   <section class="container">
+      <div class="con-title">
+         <span class="s-rank-title">排名</span>
+         <span class="s-count-title">搜索指数</span>
+      </div>
+      <ul class="list-container">
+         <%for(var i=0;i<lists.length;i++){%>
+               <li class="list-item">
+                  <span class="s-no" style="background-color:<%= i > 2 ? "blue":"red"%>"><%=i+1%></span>
+                  <span class="s-title"><%=lists[i].title%></span>
+                  <p>
+                     <%#方式1：%>
+                     <span class="s-count"><%=lists[i].count%></span>
+                     <%if(lists[i].up == 1){%>
+                        <span class="s-tips s-icon-up"></span>
+                     <%}else{%>
+                        <span class="s-tips s-icon-down"></span>  
+                     <%}%>
+                     <%#方式2：%>
+                     <span class="s-tips <%=(lists[i].up == 1) ? "s-icon-up" : "s-icon-down"%>"></span>
+                  </p>
+      
+               </li>
+         <%}%>
+      </ul>
+
+   </section>
+</body>
+</html>
