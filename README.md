@@ -113,6 +113,66 @@ WriteResult({ "nInserted" : 1 })
 ##########################################Express############################################
 express不对Node.js已有的特性进行二次抽象，我们只是在它之上扩展了web应用所需要的基本功能
 
+##########################################################################################
+应用生成器：
+express-generator:
+1.全局安装generator:npm install express-generator -g
+2.express -h:列出所有可用的命令行选项
+3.安装依赖包：npm install
+4.设置视图模板：express --view=ejs demo1(项目名称为demo1,使用ejs模板)
+5.启动应用：set DEBUG = myapp & npm start
+
+自动生成generator工程：
+1.express --ejs generator;
+2.cd generator;
+3.npm install;
+4.npm start;(启动工程)
+
+#########################路由
+//设置路由，routes为express.Router()设置的路径
+#
+ * app.get('/', (req, res)=>{
+ *    
+ * })
+ * app.use('/test',routes):use设置中间件，匹配路由所有以/test开始，如/test,/test/:name,/test/hahah等等都会走use配置的路由中间件（routes）。
+ * app.get('/test', ()=>{}):get指定的路径是什么就会匹配什么，只会匹配/test,不会匹配/test/:name,/test/hahah等
+#
+
+######################################################################################################
+socket.io通信
+
+1.服务器端：
+
+1-1：引入包：let socket = require('socket.io);
+1-2: 创建socket实例：let io = socket(http.createServer(app));//app = express()
+1-3: 建立连接：io.on('connection', (socket)=>{
+
+})
+1-4: 服务器监听消息：socket.on('msg', ()=>{
+
+})
+1-5:服务器端发送消息：socket.emit('msg', xxxxxx);
+1-6:服务器监控连接断开：socket.on('disconnect', ()=>{})
+
+
+2.客户端
+
+
+2-1：引入文件：<script src="/socket.io/socket.io.js"></script>
+2-2：建立连接：
+   let url = 'http://localhost:3000';
+   let socket = io.connect(url);
+
+2-3：socket.on('connect', ()=>{})
+
+2-4: 打开通道：socket.emit('open');
+
+2-5:客户端发送消息：socket.emit('msg', value);
+
+2-6：接受服务器发送的信息：socket.on('msg', ()=>{})
+
+2-7: 断开连接: socket.disconnect();
+
 
 
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title><%=title%></title>
+   <link rel="stylesheet" href="/stylesheets/chat.css">
+</head>
+<body>
+   <div class="container">
+      <p class="title">聊天区域</p>
+      <ul class="chatlist" id="chatList">
+      </ul>
+      <p>
+         <input type="text" placeholder="请输入内容" id="inputContent">
+         <button onClick="send()">发送</button>
+         <button onClick="closeSocket()">关闭</button>
+      </p>
+   </div>
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+      //1.建立连接
+      let url = 'http://localhost:3000';
+      let socket = io.connect(url);
+      //2.监听
+      socket.on('connect', ()=>{
+         console.log('建立连接');
+         //2.1打开通道
+         socket.emit('open');
+      })
+
+      //3.接收服务器返回的信息
+      socket.on('msg', (data)=>{
+         console.log(data)
+         dealWithMsg('服', 'service', data)
+      });
+
+      //处理消息
+      function dealWithMsg(type, className, data){
+         let liDom = document.createElement('li');
+         liDom.className = className;
+         let spanDom = document.createElement('span');
+         spanDom.innerText = `${type}：` + data;
+         liDom.appendChild(spanDom);
+         document.getElementById('chatList').appendChild(liDom);
+         //滚动条保持在底部
+         let scrollHeight = document.getElementById('chatList').scrollHeight;
+         console.log(scrollHeight);
+         document.getElementById('chatList').scrollTop = (scrollHeight - document.getElementById('chatList').clientHeight);
+      }
+      //4.客户端发送消息
+      function send(){
+         let value = document.getElementById('inputContent').value;
+         console.log(value)
+         dealWithMsg('客','custom', value);
+         socket.emit('message', value);//与服务器端on监听的消息一直
+         document.getElementById('inputContent').value = '';
+         document.getElementById('inputContent').focus();
+      }
+      // document.getElementById('inputContent').addEventListener('keydown', (e)=>{
+      //    console.log(e)
+      //    if(e.keyCode == 13){
+      //       send();
+      //    }
+      // })
+      document.getElementById('inputContent').onkeydown = (e) => {
+         if(e.keyCode == 13){
+            send();
+         }
+      }
+
+      function closeSocket(){
+         socket.disconnect();
+         window.location.href = '/';
+      }
+   </script>
+</body>
+</html>
