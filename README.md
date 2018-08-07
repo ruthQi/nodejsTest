@@ -152,6 +152,7 @@ socket.io通信
 
 })
 1-5:服务器端发送消息：socket.emit('msg', xxxxxx);
+   io.emit('msg', data);多人通信
 1-6:服务器监控连接断开：socket.on('disconnect', ()=>{})
 
 

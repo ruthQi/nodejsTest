@@ -12,8 +12,11 @@ const linkSocket = (server) => {
       //3.2 接收客户端的消息
       socket.on('message', (data)=>{
          console.log(data);
+         //实现多页面通信
+         //io.emit('msg', data);//与客户端on监听的消息一致
+         //单页面通信
          let msg = backMsg(data);
-         socket.emit('msg', msg);//与客户端on监听的消息一致
+         socket.emit('msg', msg)
       });
 
       //3.3关闭连接
