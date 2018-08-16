@@ -64,9 +64,7 @@ function joinRoom(socket, room) {
       for(let index in usersInRoom.sockets){
          let userSocketId = index;
          if(userSocketId != socket.id){
-            if(index > 0){
-               usersInRoomSummary += ', ';
-            }
+            usersInRoomSummary += ', ';
             usersInRoomSummary += nickNames[userSocketId];
          }
       }
